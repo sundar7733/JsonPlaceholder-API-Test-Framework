@@ -1,0 +1,6 @@
+testcase,title,body,userId
+All valid user data test,Test Automation,Project for Test Automation,1
+Empty title test,,Title is Empty,2
+Empty body test,Body is empty,,3
+Empty User Id Test,User id is ,empty,
+All fields empty test,,,
