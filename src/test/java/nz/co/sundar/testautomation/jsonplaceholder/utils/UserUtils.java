@@ -20,4 +20,5 @@ public class UserUtils {
                 .when()
                 .post(userResourcePath);
     }
+
 }

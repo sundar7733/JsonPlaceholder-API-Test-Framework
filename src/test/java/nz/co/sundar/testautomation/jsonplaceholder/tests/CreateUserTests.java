@@ -9,7 +9,7 @@ import nz.co.sundar.testautomation.jsonplaceholder.utils.PojoUtils;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.UserUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,7 +24,8 @@ import java.util.stream.Stream;
 
 public class CreateUserTests extends TestBase {
     String method = "POST";
-    // Load and pair rows from both CSVs
+    String resourcePath = UserUtils.userResourcePath;
+    // Load and pair rows from create-user CSV
     static Stream<Arguments> userDataProvider() throws IOException {
         Reader createReader = Files.newBufferedReader(Paths.get("src/test/resources/csv/create-user.csv"));
 
@@ -58,18 +59,7 @@ public class CreateUserTests extends TestBase {
         int id = userResponse.getId();
         int httpStatusCode = response.getStatusCode();
 
-        logRequestDetails(method);
-
-        try{
-            Assertions.assertTrue(userId > 0, "UserId should be a positive integer greater than 0. Actual: " + userId);
-            reportManager.logPass("UserId is valid: " + userId);
-        } catch (NullPointerException e) {
-            reportManager.logFail("UserId is null: " + e.getMessage());
-            Assertions.fail("UserId is null: " + e.getMessage());
-        } catch (AssertionError e) {
-            reportManager.logFail("UserId is not valid: " + e.getMessage());
-            Assertions.fail("UserId is not valid: " + e.getMessage());
-        }
+        logRequestDetails(method,resourcePath);
 
         AssertionsUtils.assertCreateUserResponse(userResponse, httpStatusCode,
                 createUserData.title, createUserData.body, createUserData.userId, id);
@@ -77,8 +67,6 @@ public class CreateUserTests extends TestBase {
         reportManager.logInfo("Create user response: " + response.asString());
         reportManager.getTest().info("User created with ID: " + id);
         reportManager.logInfo("Response field validation for create user " + userId + " completed successfully.");
-
-
 
     }
 }

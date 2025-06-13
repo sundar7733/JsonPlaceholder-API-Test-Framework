@@ -15,7 +15,7 @@ public class AssertionsUtils {
         List<String> errors = new ArrayList<>();
 
         try {
-            assertEquals(200, httpStatusCode, "Validating http status code", errors);
+            assertEquals(201, httpStatusCode, "Validating http status code", errors);
             assertEquals(expectedtitle, userResponse.getTitle(), "Validating Title", errors);
             assertEquals(expectedbody, userResponse.getBody(), "Validating Body", errors);
             assertEquals(expecteduserId, userResponse.getUserId(), "Validating UserId", errors);
@@ -43,7 +43,7 @@ public class AssertionsUtils {
     public static void assertAllErrors(List<String> errors, ReportManager reportManager) {
         if (errors != null && !errors.isEmpty()) {
             for (String error : errors) {
-                reportManager.logInfo("ASSERTION FAILURE: " + error);
+                reportManager.logFail("ASSERTION FAILURE: " + error);
             }
             throw new AssertionError("Test failed due to assertion errors: " + errors);
         }

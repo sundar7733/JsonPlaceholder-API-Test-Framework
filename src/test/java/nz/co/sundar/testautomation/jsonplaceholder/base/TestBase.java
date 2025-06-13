@@ -46,11 +46,6 @@ public class TestBase {
         ReportManager.getInstance().logInfo("Request Method: " + method);
     }
 
-    // For /booking only
-    public void logRequestDetails(String method) {
-        logRequestDetails(method, "/booking");
-    }
-
     // For /booking/{id} with int
     public void logRequestForBookingId(String method, int bookingId) {
         logRequestDetails(method, "/booking/" + bookingId);
