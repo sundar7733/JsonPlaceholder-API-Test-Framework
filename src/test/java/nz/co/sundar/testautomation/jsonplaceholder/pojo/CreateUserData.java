@@ -1,8 +1,8 @@
 package nz.co.sundar.testautomation.jsonplaceholder.pojo;
 
 public class CreateUserData {
-    public String testcase;
-    public User user;
+    private final String testcase;
+    private final User user;
 
     public CreateUserData(String testcase, User user) {
         this.testcase = testcase;

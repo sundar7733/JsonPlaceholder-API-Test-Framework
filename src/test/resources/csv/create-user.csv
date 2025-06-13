@@ -2,3 +2,4 @@ testcase,title,body,userId
 All valid user data test,Test Automation,Project for Test Automation,1
 Empty title test,,Title is Empty,2
 Empty body test,Body is empty,,3
+UserId as Zero test,User Id is ,Zero test,0

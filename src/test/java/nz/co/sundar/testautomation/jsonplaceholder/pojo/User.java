@@ -1,9 +1,9 @@
 package nz.co.sundar.testautomation.jsonplaceholder.pojo;
 
 public class User {
- public String title;
- public String body;
- public int userId;
+ private String title;
+ private String body;
+ private int userId;
  public User () {
  }
     public User(String title, String body, int userId) {
