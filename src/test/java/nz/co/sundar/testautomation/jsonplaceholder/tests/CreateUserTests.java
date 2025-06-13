@@ -3,13 +3,13 @@ package nz.co.sundar.testautomation.jsonplaceholder.tests;
 import io.restassured.response.Response;
 import nz.co.sundar.testautomation.jsonplaceholder.base.TestBase;
 import nz.co.sundar.testautomation.jsonplaceholder.pojo.CreateUserData;
+import nz.co.sundar.testautomation.jsonplaceholder.pojo.User;
 import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserResponse;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.AssertionsUtils;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.PojoUtils;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.UserUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -39,19 +39,20 @@ public class CreateUserTests extends TestBase {
         return arguments.stream();
     }
     public static CreateUserData parseCSVRecord(CSVRecord record) {
-        return new CreateUserData(
-                record.get("testcase"),
+        User user = new User(
                 record.get("title"),
                 record.get("body"),
                 Integer.parseInt(record.get("userId"))
-
         );
+
+        return new CreateUserData(record.get("testcase"), user);
     }
     @ParameterizedTest(name = "CreateUserTests Test #{index} - {0}")
     @MethodSource("userDataProvider")
     public void createBookingTest(CreateUserData createUserData) {
+        User user = createUserData.getUser();
 
-        Response response = UserUtils.createUser(createUserData.title, createUserData.body, createUserData.userId);
+        Response response = UserUtils.createUser(user.getTitle(), user.getBody(), user.getUserId());
 
         UserResponse userResponse = PojoUtils.convertJsonToUserResponse(response.asString());
 
@@ -62,7 +63,7 @@ public class CreateUserTests extends TestBase {
         logRequestDetails(method,resourcePath);
 
         AssertionsUtils.assertCreateUserResponse(userResponse, httpStatusCode,
-                createUserData.title, createUserData.body, createUserData.userId, id);
+                user.getTitle(), user.getBody(), user.getUserId(), id);
 
         reportManager.logInfo("Create user response: " + response.asString());
         reportManager.getTest().info("User created with ID: " + id);

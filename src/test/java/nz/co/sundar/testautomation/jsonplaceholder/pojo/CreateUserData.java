@@ -2,17 +2,14 @@ package nz.co.sundar.testautomation.jsonplaceholder.pojo;
 
 public class CreateUserData {
     public String testcase;
-    public String title;
-    public String body;
-    public int userId;
+    public User user;
 
-    public CreateUserData(String testcase, String title, String body, int userId) {
+    public CreateUserData(String testcase, User user) {
         this.testcase = testcase;
-        this.title = title;
-        this.body = body;
-        this.userId = userId;
+        this.user = user;
     }
     public String getTestCase() { return testcase; }
+    public User getUser()       { return user; }
 
     @Override
     public String toString() {
