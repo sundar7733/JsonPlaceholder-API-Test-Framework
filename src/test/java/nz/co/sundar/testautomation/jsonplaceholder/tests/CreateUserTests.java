@@ -54,7 +54,7 @@ public class CreateUserTests extends TestBase {
 
         List<Arguments> arguments = new ArrayList<>();
         for (CSVRecord createRecord : createRecords) {
-            CreateUserData createUserData = GenericUtils.parseCSVRecord(createRecord);
+            CreateUserData createUserData = GenericUtils.parseCreateUserRecord(createRecord);
             arguments.add(Arguments.of(createUserData));
         }
         return arguments.stream();
@@ -80,7 +80,7 @@ public class CreateUserTests extends TestBase {
 
         Response response = GenericUtils.createUser(user.getTitle(), user.getBody(), user.getUserId());
 
-        UserResponse userResponse = PojoUtils.convertJsonToUserResponse(response.asString());
+        UserResponse userResponse = PojoUtils.convertJsonToPojo(response.asString(), UserResponse.class);
 
         int userId = userResponse.getUserId();
         int id = userResponse.getId();

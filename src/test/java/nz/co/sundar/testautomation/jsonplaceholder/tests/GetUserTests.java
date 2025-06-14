@@ -53,7 +53,7 @@ public class GetUserTests extends TestBase {
 
         List<Arguments> arguments = new ArrayList<>();
         for (CSVRecord getRecord : getRecords) {
-            GetUserData getUserData = GenericUtils.parseGetCSVRecord(getRecord);
+            GetUserData getUserData = GenericUtils.parseGetUserRecord(getRecord);
             arguments.add(Arguments.of(getUserData));
         }
         return arguments.stream();
@@ -71,7 +71,7 @@ public class GetUserTests extends TestBase {
         Response response = GenericUtils.getUser(Id);
         int httpStatusCode = response.getStatusCode();
 
-        UserGetResponse userGetResponse = PojoUtils.convertJsonToGetUserResponse(response.asString());
+        UserGetResponse userGetResponse = PojoUtils.convertJsonToPojo(response.asString(), UserGetResponse.class);
 
         logRequestDetails(method, resourcePath + "/" + Id);
 

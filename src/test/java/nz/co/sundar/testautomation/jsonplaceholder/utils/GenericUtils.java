@@ -39,7 +39,7 @@ public class GenericUtils {
      * @param record The CSVRecord to parse
      * @return A CreateUserData object containing the parsed values
      */
-    public static CreateUserData parseCSVRecord(CSVRecord record) {
+    public static CreateUserData parseCreateUserRecord(CSVRecord record) {
         User user = new User(
                 record.get("title"),
                 record.get("body"),
@@ -54,18 +54,18 @@ public class GenericUtils {
      * @param record The CSVRecord to parse
      * @return A GetUserData object containing the parsed values
      */
-    public static GetUserData parseGetCSVRecord(CSVRecord record) {
+    public static GetUserData parseGetUserRecord(CSVRecord record) {
 
         return new GetUserData(record.get("testcase"), Integer.parseInt(record.get("Id")));
     }
     /**
      * Retrieves a user by ID from the JSONPlaceholder API.
      *
-     * @param Id The ID of the user to retrieve
+     * @param id The ID of the user to retrieve
      * @return A Response object containing the API response
      */
-    public static Response getUser(int Id) {
-        String userResourcePathWithId = userResourcePath + "/" + Id;
+    public static Response getUser(int id) {
+        String userResourcePathWithId = userResourcePath + "/" + id;
 
         return RestAssured
                 .given()

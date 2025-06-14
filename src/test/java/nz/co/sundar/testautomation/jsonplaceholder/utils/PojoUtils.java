@@ -1,33 +1,24 @@
 package nz.co.sundar.testautomation.jsonplaceholder.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserGetResponse;
-import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserResponse;
 
 import java.io.IOException;
-/** Utility class to convert JSON strings to POJOs for UserResponse and UserGetResponse
+/**
+ * Utility class for converting JSON strings to POJOs using Jackson.
  */
-public class PojoUtils {
-// Utility class to convert JSON strings to POJOs for UserResponse
-    public static UserResponse convertJsonToUserResponse(String jsonString) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        UserResponse userResponse = null;
-        try {
-            userResponse = objectMapper.readValue(jsonString, UserResponse.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return userResponse;
+public final class PojoUtils {
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    private PojoUtils() {
+    // Private constructor to prevent instantiation
     }
- // Utility class to convert JSON strings to POJOs for UserGetResponse
-    public static UserGetResponse convertJsonToGetUserResponse(String jsonString) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        UserGetResponse userGetResponse = null;
+
+    public static <T> T convertJsonToPojo(String jsonString, Class<T> clazz) {
         try {
-            userGetResponse = objectMapper.readValue(jsonString, UserGetResponse.class);
+            return objectMapper.readValue(jsonString, clazz);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to convert JSON to " + clazz.getSimpleName(), e);
         }
-        return userGetResponse;
     }
 }
