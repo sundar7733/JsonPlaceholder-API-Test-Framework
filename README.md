@@ -3,7 +3,7 @@
 This project automates API tests for the public service  
 [`https://jsonplaceholder.typicode.com`](https://jsonplaceholder.typicode.com).
 
-It focuses on two user‑related endpoints:
+This FrameWork focuses on two user‑related endpoints:
 
 | Method | Endpoint                          | Purpose                     |
 |--------|-----------------------------------|-----------------------------|
@@ -42,7 +42,7 @@ src
 ## How to Run the Tests
 
 ### Prerequisites
-* Java 17(or 11+)
+* Java 17 (or 11+)
 * Maven 3.8+
 * IDE (IntelliJ IDEA recommended)
 * Internet connection (tests hit the live JSONPlaceholder API)
