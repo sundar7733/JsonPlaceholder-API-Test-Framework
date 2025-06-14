@@ -40,13 +40,18 @@ public class GenericUtils {
      * @return A CreateUserData object containing the parsed values
      */
     public static CreateUserData parseCreateUserRecord(CSVRecord record) {
-        User user = new User(
-                record.get("title"),
-                record.get("body"),
-                Integer.parseInt(record.get("userId"))
-        );
+        try {
+            int userId = Integer.parseInt(record.get("userId"));
+            User user = new User(
+                    record.get("title"),
+                    record.get("body"),
+                    userId
+            );
+            return new CreateUserData(record.get("testcase"), user);
 
-        return new CreateUserData(record.get("testcase"), user);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid userId in record: " + record.get("userId"), e);
+        }
     }
     /**
      * Parses a CSV record into a GetUserData object.
@@ -55,8 +60,12 @@ public class GenericUtils {
      * @return A GetUserData object containing the parsed values
      */
     public static GetUserData parseGetUserRecord(CSVRecord record) {
-
-        return new GetUserData(record.get("testcase"), Integer.parseInt(record.get("Id")));
+        try {
+            int id = Integer.parseInt(record.get("Id"));
+            return new GetUserData(record.get("testcase"), id);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid id in record: " + record.get("Id"), e);
+        }
     }
     /**
      * Retrieves a user by ID from the JSONPlaceholder API.
