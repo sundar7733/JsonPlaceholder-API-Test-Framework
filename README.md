@@ -102,4 +102,4 @@ Follow these steps to have your updates added to the project.
     - Make sure to pull the latest changes from the main branch before creating your new branch.
 2. Commit your work. Ensure you follow appropriate conventions and the tests pass.
 3. Create a pull request from your branch back to main. Add appropriate reviewers and request a code-review. Your code will be reviewed, and you may be asked to make changes for test quality.
-4. Once the pull-request is approved, merge your branch into main. Ensure you delete your branch as you merge to ensure stale branches 
+4. Once the pull-request is approved, merge your branch into main. Ensure you delete your branch as you merge to ensure stale branches are not retained.
