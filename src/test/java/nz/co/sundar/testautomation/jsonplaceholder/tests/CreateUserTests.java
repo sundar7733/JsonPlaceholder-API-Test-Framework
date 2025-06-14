@@ -60,7 +60,7 @@ public class CreateUserTests extends TestBase {
         return arguments.stream();
     }
     /**
-     * Test case to verify successful creation of a user in the JSONPlaceholder API.
+     * Test case to verify the successful creation of a user in the JSONPlaceholder API.
      *
      * <p><strong>Test Workflow:</strong></p>
      * <ol>
