@@ -32,6 +32,7 @@ public class AssertionsUtils {
             assertEquals(201, httpStatusCode, "Validating http status code", errors);
             assertEquals(expectedTitle, userResponse.getTitle(), "Validating Title", errors);
             assertEquals(expectedBody, userResponse.getBody(), "Validating Body", errors);
+
             assertEquals(expectedUserId, userResponse.getUserId(), "Validating UserId", errors);
             assertTrue(expectedId > 0, "Id should be a positive integer greater than 0. Actual: " + expectedId, errors);
 
@@ -56,15 +57,19 @@ public class AssertionsUtils {
             assertEquals(200, httpStatusCode, "Validating http status code", errors);
             assertEquals(expectedId, userGetResponse.getId(), "Validating Id", errors);
             assertNotNullAndLog(userGetResponse.getName(),"Name",errors);
+
             assertNotNullAndLog(userGetResponse.getUsername(), "Username",errors);
             assertNotNullAndLog(userGetResponse.getEmail(),"Email", errors);
             assertNotNullAndLog(userGetResponse.getAddress(), "Address Object", errors);
+
             if( userGetResponse.getAddress() != null) {
                 assertNotNullAndLog(userGetResponse.getAddress().getStreet(), "Street", errors);
                 assertNotNullAndLog(userGetResponse.getAddress().getSuite(), "Suite", errors);
                 assertNotNullAndLog(userGetResponse.getAddress().getCity(), "City", errors);
+
                 assertNotNullAndLog(userGetResponse.getAddress().getZipcode(), "Zipcode", errors);
                 assertNotNullAndLog(userGetResponse.getAddress().getGeo(), "Geo Object", errors);
+
                 if (userGetResponse.getAddress().getGeo() != null) {
                     assertNotNullAndLog(userGetResponse.getAddress().getGeo().getLat(), "latitude", errors);
                     assertNotNullAndLog(userGetResponse.getAddress().getGeo().getLng(), "longitude", errors);
@@ -73,6 +78,7 @@ public class AssertionsUtils {
             assertNotNullAndLog(userGetResponse.getPhone(), "Phone", errors);
             assertNotNullAndLog(userGetResponse.getWebsite(), "Website", errors);
             assertNotNullAndLog(userGetResponse.getCompany(), "Company Object", errors);
+
             if( userGetResponse.getCompany() != null) {
                 assertNotNullAndLog(userGetResponse.getCompany().getName(), "Company Name", errors);
                 assertNotNullAndLog(userGetResponse.getCompany().getCatchPhrase(), "Company Catch Phrase", errors);
@@ -96,10 +102,13 @@ public class AssertionsUtils {
     public static <T> void assertEquals(T expected, T actual, String message, List<String> errors) {
         try {
             Assertions.assertEquals(expected, actual, message);
+
             String passMessage = "PASS: " + message + " | Expected: " + expected + ", Actual: " + actual;
+
             reportManager.logPass(passMessage);
         } catch (AssertionError e) {
             String errorMessage = "FAIL: " + message + " | expected: " + expected + " but was: " + actual;
+
             reportManager.logFail(errorMessage);
             errors.add(errorMessage);
         }
@@ -128,7 +137,9 @@ public class AssertionsUtils {
     public static void assertNotNullAndLog(Object value, String fieldName, List<String> errors) {
         try {
             Assertions.assertNotNull(value, fieldName + " should not be null");
+
             String passMessage = fieldName + " is not null (" + value + ")";
+
             reportManager.logPass(passMessage);
         } catch (AssertionError e) {
             String errorMessage = "FAIL: " + fieldName + " is null";
