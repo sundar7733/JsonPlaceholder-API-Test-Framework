@@ -39,7 +39,6 @@ import java.util.stream.Stream;
 public class GetUserTests extends TestBase {
     String method = "GET";
     String resourcePath = GenericUtils.userResourcePath;
-    // Load and pair rows from get-user CSV
     /**
      * Provides user data for parameterized tests by reading from a CSV file.
      *

@@ -40,7 +40,6 @@ import java.util.stream.Stream;
 public class CreateUserTests extends TestBase {
     String method = "POST";
     String resourcePath = GenericUtils.userResourcePath;
-    // Load and pair rows from create-user CSV
     /**
      * Provides user data for parameterized tests by reading from a CSV file.
      *
