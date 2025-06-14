@@ -5,9 +5,10 @@ import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserGetResponse;
 import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserResponse;
 
 import java.io.IOException;
-
+/** Utility class to convert JSON strings to POJOs for UserResponse and UserGetResponse
+ */
 public class PojoUtils {
- // Utility class to convert JSON strings to POJOs for UserResponse
+// Utility class to convert JSON strings to POJOs for UserResponse
     public static UserResponse convertJsonToUserResponse(String jsonString) {
         ObjectMapper objectMapper = new ObjectMapper();
         UserResponse userResponse = null;

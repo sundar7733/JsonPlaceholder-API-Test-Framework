@@ -46,18 +46,8 @@ public class TestBase {
         ReportManager.getInstance().logInfo("Request Method: " + method);
     }
 
-    // For /booking/{id} with int
-    public void logRequestForBookingId(String method, int bookingId) {
-        logRequestDetails(method, "/booking/" + bookingId);
-    }
-
-    // For /booking/{id} with String (e.g., invalid id)
-    public void logRequestForBookingId(String method, String bookingId) {
-        logRequestDetails(method, "/booking/" + bookingId);
-    }
-
     /**
-     * Flushes the ExtentReports object after all nz.co.sundar.testautomation.restfulbooker.tests in the class have completed.
+     * Flushes the ExtentReports object after all nz.co.sundar.testautomation.jsonplaceholder.tests in the class have completed.
      * This generates the final report file.
      */
 

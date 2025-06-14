@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import java.util.ArrayList;
 import java.util.List;
 
-/* * AssertionsUtils.java
+/** AssertionsUtils.java
  * This class provides utility methods for asserting user creation and retrieval responses.
  * It includes methods to validate HTTP status codes, user details, and handle assertion errors.
  */
@@ -19,21 +19,21 @@ public class AssertionsUtils {
      *
      * @param userResponse The UserResponse object containing the response data.
      * @param httpStatusCode The HTTP status code of the response.
-     * @param expectedtitle The expected title in the response.
-     * @param expectedbody The expected body in the response.
-     * @param expecteduserId The expected user ID in the response.
-     * @param expectedid The expected ID in the response.
+     * @param expectedTitle The expected title in the response.
+     * @param expectedBody The expected body in the response.
+     * @param expectedUserId The expected user ID in the response.
+     * @param expectedId The expected ID in the response.
      */
-    public static void assertCreateUserResponse(UserResponse userResponse, int httpStatusCode, String expectedtitle, String expectedbody, int expecteduserId, int expectedid) {
+    public static void assertCreateUserResponse(UserResponse userResponse, int httpStatusCode, String expectedTitle, String expectedBody, int expectedUserId, int expectedId) {
 
         List<String> errors = new ArrayList<>();
 
         try {
             assertEquals(201, httpStatusCode, "Validating http status code", errors);
-            assertEquals(expectedtitle, userResponse.getTitle(), "Validating Title", errors);
-            assertEquals(expectedbody, userResponse.getBody(), "Validating Body", errors);
-            assertEquals(expecteduserId, userResponse.getUserId(), "Validating UserId", errors);
-            Assertions.assertTrue(expectedid > 0, "Id should be a positive integer greater than 0. Actual: " + expectedid);
+            assertEquals(expectedTitle, userResponse.getTitle(), "Validating Title", errors);
+            assertEquals(expectedBody, userResponse.getBody(), "Validating Body", errors);
+            assertEquals(expectedUserId, userResponse.getUserId(), "Validating UserId", errors);
+            assertTrue(expectedId > 0, "Id should be a positive integer greater than 0. Actual: " + expectedId, errors);
 
         } catch (Exception e) {
             reportManager.logFail("EXCEPTION: Failed to assert user creation response. Error: " + e.getMessage());
@@ -58,24 +58,33 @@ public class AssertionsUtils {
             assertNotNullAndLog(userGetResponse.getName(),"Name",errors);
             assertNotNullAndLog(userGetResponse.getUsername(), "Username",errors);
             assertNotNullAndLog(userGetResponse.getEmail(),"Email", errors);
-            assertNotNullAndLog(userGetResponse.getAddress().getStreet(), "Street", errors);
-            assertNotNullAndLog(userGetResponse.getAddress().getSuite(), "Suite", errors);
-            assertNotNullAndLog(userGetResponse.getAddress().getCity(), "City", errors);
-            assertNotNullAndLog(userGetResponse.getAddress().getZipcode(), "Zipcode", errors);
-            assertNotNullAndLog(userGetResponse.getAddress().getGeo().getLat(), "Geo latitude", errors);
-            assertNotNullAndLog(userGetResponse.getAddress().getGeo().getLng(), "Geo longitude", errors);
+            assertNotNullAndLog(userGetResponse.getAddress(), "Address Object", errors);
+            if( userGetResponse.getAddress() != null) {
+                assertNotNullAndLog(userGetResponse.getAddress().getStreet(), "Street", errors);
+                assertNotNullAndLog(userGetResponse.getAddress().getSuite(), "Suite", errors);
+                assertNotNullAndLog(userGetResponse.getAddress().getCity(), "City", errors);
+                assertNotNullAndLog(userGetResponse.getAddress().getZipcode(), "Zipcode", errors);
+                assertNotNullAndLog(userGetResponse.getAddress().getGeo(), "Geo Object", errors);
+                if (userGetResponse.getAddress().getGeo() != null) {
+                    assertNotNullAndLog(userGetResponse.getAddress().getGeo().getLat(), "latitude", errors);
+                    assertNotNullAndLog(userGetResponse.getAddress().getGeo().getLng(), "longitude", errors);
+                }
+            }
             assertNotNullAndLog(userGetResponse.getPhone(), "Phone", errors);
             assertNotNullAndLog(userGetResponse.getWebsite(), "Website", errors);
-            assertNotNullAndLog(userGetResponse.getCompany().getName(), "Company name", errors);
-            assertNotNullAndLog(userGetResponse.getCompany().getCatchPhrase(), "Company catch phrase", errors);
-            assertNotNullAndLog(userGetResponse.getCompany().getBs(), "Company bs", errors);
+            assertNotNullAndLog(userGetResponse.getCompany(), "Company Object", errors);
+            if( userGetResponse.getCompany() != null) {
+                assertNotNullAndLog(userGetResponse.getCompany().getName(), "Company Name", errors);
+                assertNotNullAndLog(userGetResponse.getCompany().getCatchPhrase(), "Company Catch Phrase", errors);
+                assertNotNullAndLog(userGetResponse.getCompany().getBs(), "Company BS", errors);
+            }
         } catch (Exception e) {
             reportManager.logFail("EXCEPTION: Failed to assert get user response. Error: " + e.getMessage());
             errors.add("Exception occurred: " + e.getMessage());
         }
         assertAllErrors(errors, reportManager);
     }
-/**
+     /**
      * Asserts that two objects are equal and logs the result.
      *
      * @param expected The expected value.
@@ -125,6 +134,24 @@ public class AssertionsUtils {
             String errorMessage = "FAIL: " + fieldName + " is null";
             reportManager.logFail(errorMessage);
             errors.add(errorMessage);
+        }
+    }
+    /**
+     * Asserts that an object is not null and logs the result.
+     *
+     * @param condition The condition to check.
+     * @param message  The message to log if the condition is true.
+     * @param errors The list to collect errors.
+     */
+    public static void assertTrue(boolean condition,
+                                        String message,
+                                        List<String> errors) {
+        try {
+            Assertions.assertTrue(condition, message);
+            reportManager.logPass("PASS: " + message);
+        } catch (AssertionError ae) {
+            reportManager.logFail("FAIL: " + message);
+            errors.add("FAIL: " + message);
         }
     }
 }
