@@ -3,7 +3,7 @@ package nz.co.sundar.testautomation.jsonplaceholder.tests;
 import io.restassured.response.Response;
 import nz.co.sundar.testautomation.jsonplaceholder.base.TestBase;
 import nz.co.sundar.testautomation.jsonplaceholder.pojo.GetUserData;
-import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserGetResponse;
+import nz.co.sundar.testautomation.jsonplaceholder.pojo.GetUserResponse;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.AssertionsUtils;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.GenericUtils;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.PojoUtils;
@@ -71,7 +71,7 @@ public class GetUserTests extends TestBase {
         Response response = GenericUtils.getUser(Id);
         int httpStatusCode = response.getStatusCode();
 
-        UserGetResponse userGetResponse = PojoUtils.convertJsonToPojo(response.asString(), UserGetResponse.class);
+        GetUserResponse userGetResponse = PojoUtils.convertJsonToPojo(response.asString(), GetUserResponse.class);
 
         logRequestDetails(method, resourcePath + "/" + Id);
 

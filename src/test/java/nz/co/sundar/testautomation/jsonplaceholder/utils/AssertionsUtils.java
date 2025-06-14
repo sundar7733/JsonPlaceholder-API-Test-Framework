@@ -1,7 +1,7 @@
 package nz.co.sundar.testautomation.jsonplaceholder.utils;
 
-import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserGetResponse;
-import nz.co.sundar.testautomation.jsonplaceholder.pojo.UserResponse;
+import nz.co.sundar.testautomation.jsonplaceholder.pojo.CreateUserResponse;
+import nz.co.sundar.testautomation.jsonplaceholder.pojo.GetUserResponse;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
@@ -17,14 +17,14 @@ public class AssertionsUtils {
     /**
      * Asserts the response of user creation.
      *
-     * @param userResponse The UserResponse object containing the response data.
+     * @param userResponse The CreateUserResponse object containing the response data.
      * @param httpStatusCode The HTTP status code of the response.
      * @param expectedTitle The expected title in the response.
      * @param expectedBody The expected body in the response.
      * @param expectedUserId The expected user ID in the response.
      * @param expectedId The expected ID in the response.
      */
-    public static void assertCreateUserResponse(UserResponse userResponse, int httpStatusCode, String expectedTitle, String expectedBody, int expectedUserId, int expectedId) {
+    public static void assertCreateUserResponse(CreateUserResponse userResponse, int httpStatusCode, String expectedTitle, String expectedBody, int expectedUserId, int expectedId) {
 
         List<String> errors = new ArrayList<>();
 
@@ -45,11 +45,11 @@ public class AssertionsUtils {
     /**
      * Asserts the response of getting a user.
      *
-     * @param userGetResponse The UserGetResponse object containing the response data.
+     * @param userGetResponse The GetUserResponse object containing the response data.
      * @param httpStatusCode The HTTP status code of the response.
      * @param expectedId The expected ID in the response.
      */
-    public static void assertGetUserResponse(UserGetResponse userGetResponse, int httpStatusCode, int expectedId) {
+    public static void assertGetUserResponse(GetUserResponse userGetResponse, int httpStatusCode, int expectedId) {
         List<String> errors = new ArrayList<>();
 
         try {

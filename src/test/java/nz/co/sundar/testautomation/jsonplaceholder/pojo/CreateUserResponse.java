@@ -1,16 +1,16 @@
 package nz.co.sundar.testautomation.jsonplaceholder.pojo;
 
-public class UserResponse {
+public class CreateUserResponse {
 
     private int userId;
     private int id;
     private String title;
     private String body;
 
-    public UserResponse() {
+    public CreateUserResponse() {
     }
 
-    public UserResponse(int userId, int id, String title, String body) {
+    public CreateUserResponse(int userId, int id, String title, String body) {
         this.userId = userId;
         this.id = id;
         this.title = title;
@@ -51,7 +51,7 @@ public class UserResponse {
 
     @Override
     public String toString() {
-        return "UserResponse{" +
+        return "CreateUserResponse{" +
                 "userId=" + userId +
                 ", id=" + id +
                 ", title='" + title + '\'' +

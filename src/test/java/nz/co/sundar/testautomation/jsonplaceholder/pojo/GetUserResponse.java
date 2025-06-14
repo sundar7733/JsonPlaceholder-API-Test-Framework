@@ -1,6 +1,6 @@
 package nz.co.sundar.testautomation.jsonplaceholder.pojo;
 
-public class UserGetResponse {
+public class GetUserResponse {
     private int id;
     private String name;
     private String username;
@@ -10,10 +10,10 @@ public class UserGetResponse {
     private String website;
     private Company company;
 
-    public UserGetResponse() {
+    public GetUserResponse() {
     }
 
-    public UserGetResponse(int id, String name, String username, String email, Address address, String phone, String website, Company company) {
+    public GetUserResponse(int id, String name, String username, String email, Address address, String phone, String website, Company company) {
         this.id = id;
         this.name = name;
         this.username = username;
