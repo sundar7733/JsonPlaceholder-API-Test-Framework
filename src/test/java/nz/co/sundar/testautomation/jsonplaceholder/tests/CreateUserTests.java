@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+
 /**
  * Test class responsible for verifying the creation of a new user using the JSONPlaceholder API.
  *
