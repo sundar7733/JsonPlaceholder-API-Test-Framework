@@ -11,7 +11,7 @@ import org.apache.commons.csv.CSVRecord;
 /** * Utility class for handling user-related operations in the JSONPlaceholder API.
  * Provides methods to create users, parse CSV records, and retrieve user data.
  */
-public class GenericUtils {
+public class UserUtils {
  public static String userResourcePath = "/users";
  /**
      * Creates a user with the specified title, body, and userId.

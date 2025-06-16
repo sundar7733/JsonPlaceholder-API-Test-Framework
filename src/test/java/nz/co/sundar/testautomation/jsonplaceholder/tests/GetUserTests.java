@@ -5,7 +5,7 @@ import nz.co.sundar.testautomation.jsonplaceholder.base.TestBase;
 import nz.co.sundar.testautomation.jsonplaceholder.pojo.GetUserData;
 import nz.co.sundar.testautomation.jsonplaceholder.pojo.GetUserResponse;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.AssertionsUtils;
-import nz.co.sundar.testautomation.jsonplaceholder.utils.GenericUtils;
+import nz.co.sundar.testautomation.jsonplaceholder.utils.UserUtils;
 import nz.co.sundar.testautomation.jsonplaceholder.utils.PojoUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -39,7 +39,7 @@ import java.util.stream.Stream;
  */
 public class GetUserTests extends TestBase {
     String method = "GET";
-    String resourcePath = GenericUtils.userResourcePath;
+    String resourcePath = UserUtils.userResourcePath;
     /**
      * Provides user data for parameterized tests by reading from a CSV file.
      *
@@ -53,7 +53,7 @@ public class GetUserTests extends TestBase {
 
         List<Arguments> arguments = new ArrayList<>();
         for (CSVRecord getRecord : getRecords) {
-            GetUserData getUserData = GenericUtils.parseGetUserRecord(getRecord);
+            GetUserData getUserData = UserUtils.parseGetUserRecord(getRecord);
             arguments.add(Arguments.of(getUserData));
         }
         return arguments.stream();
@@ -68,7 +68,7 @@ public class GetUserTests extends TestBase {
     public void getUserTest(GetUserData getUserData) {
         int Id = getUserData.getId();
 
-        Response response = GenericUtils.getUser(Id);
+        Response response = UserUtils.getUser(Id);
         int httpStatusCode = response.getStatusCode();
 
         GetUserResponse userGetResponse = PojoUtils.convertJsonToPojo(response.asString(), GetUserResponse.class);
