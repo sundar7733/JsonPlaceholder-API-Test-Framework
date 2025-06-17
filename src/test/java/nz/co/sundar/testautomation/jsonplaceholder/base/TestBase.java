@@ -31,7 +31,7 @@ public class TestBase {
     @BeforeEach
     public void startTest(TestInfo testInfo) {
         String testName = testInfo.getDisplayName().replace("()", "");
-        ReportManager.getInstance().createTest(testName);
+        reportManager.createTest(testName);
     }
     /**
      * Logs the request details including the method and resource path.
@@ -42,8 +42,8 @@ public class TestBase {
      */
     public void logRequestDetails(String method, String resourcePath) {
         String fullRequestUrl = RestAssured.baseURI + resourcePath;
-        ReportManager.getInstance().logInfo("Request URL: " + fullRequestUrl);
-        ReportManager.getInstance().logInfo("Request Method: " + method);
+        reportManager.logInfo("Request URL: " + fullRequestUrl);
+        reportManager.logInfo("Request Method: " + method);
     }
 
     /**
@@ -53,6 +53,6 @@ public class TestBase {
 
     @AfterAll
     public void tearDown() {
-        ReportManager.getInstance().flushReport();
+        reportManager.flushReport();
     }
 }
